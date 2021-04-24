@@ -40,7 +40,24 @@ from PIL import Image
 @pyrogram.Client.on_callback_query()
 async def button(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
-        await bot.delete_messages(
+        update_channel = Config.UPDATE_CHANNEL
+    if update_channel:
+        try:
+            user = await bot.get_chat_member(update_channel, update.chat.id)
+            if user.status == "kicked":
+               await update.reply_text(" Sorry, You are **B A N N E D**")
+               return
+        except UserNotParticipant:
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+            await update.reply_text(
+                text="**Oh Dear In Order To Use Me Join My Update Channnl 🤭**",
+                reply_markup=InlineKeyboardMarkup([
+                    [ InlineKeyboardButton(text="Join My Updates Channel", url=f"https://t.me/{update_channel}")]
+              ])
+            )
+            return
+        else:
+            await bot.delete_messages(
             chat_id=update.message.chat.id,
             message_ids=update.message.message_id,
             revoke=True
