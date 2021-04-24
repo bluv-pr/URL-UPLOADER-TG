@@ -31,7 +31,40 @@ from helper_funcs.chat_base import TRChatBase
 @pyrogram.Client.on_message(pyrogram.Filters.command(["generatecustomthumbnail"]))
 async def generate_custom_thumbnail(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
-        await bot.delete_messages(
+        update_channel = Config.UPDATE_CHANNEL
+
+    if update_channel:
+
+        try:
+
+            user = await bot.get_chat_member(update_channel, update.chat.id)
+
+            if user.status == "kicked":
+
+               await update.reply_text(" Sorry, You are **B A N N E D**")
+
+               return
+
+        except UserNotParticipant:
+
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+
+            await update.reply_text(
+
+                text="**Oh Dear In Order To Use Me Join My Update Channnl 🤭**",
+
+                reply_markup=InlineKeyboardMarkup([
+
+                    [ InlineKeyboardButton(text="Join My Updates Channel", url=f"https://t.me/{update_channel}")]
+
+              ])
+
+            )
+
+            return
+
+        else:
+          await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
             revoke=True
@@ -87,7 +120,40 @@ async def generate_custom_thumbnail(bot, update):
 @pyrogram.Client.on_message(pyrogram.Filters.photo)
 async def save_photo(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
-        await bot.delete_messages(
+        update_channel = Config.UPDATE_CHANNEL
+
+    if update_channel:
+
+        try:
+
+            user = await bot.get_chat_member(update_channel, update.chat.id)
+
+            if user.status == "kicked":
+
+               await update.reply_text(" Sorry, You are **B A N N E D**")
+
+               return
+
+        except UserNotParticipant:
+
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+
+            await update.reply_text(
+
+                text="**Oh Dear In Order To Use Me Join My Update Channnl 🤭**",
+
+                reply_markup=InlineKeyboardMarkup([
+
+                    [ InlineKeyboardButton(text="Join My Updates Channel", url=f"https://t.me/{update_channel}")]
+
+              ])
+
+            )
+
+            return
+
+        else:
+          await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
             revoke=True
@@ -121,7 +187,40 @@ async def save_photo(bot, update):
 @pyrogram.Client.on_message(pyrogram.Filters.command(["deletethumbnail"]))
 async def delete_thumbnail(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
-        await bot.delete_messages(
+        update_channel = Config.UPDATE_CHANNEL
+
+    if update_channel:
+
+        try:
+
+            user = await bot.get_chat_member(update_channel, update.chat.id)
+
+            if user.status == "kicked":
+
+               await update.reply_text(" Sorry, You are **B A N N E D**")
+
+               return
+
+        except UserNotParticipant:
+
+            #await update.reply_text(f"Join @{update_channel} To Use Me")
+
+            await update.reply_text(
+
+                text="**Oh Dear In Order To Use Me Join My Update Channnl 🤭**",
+
+                reply_markup=InlineKeyboardMarkup([
+
+                    [ InlineKeyboardButton(text="Join My Updates Channel", url=f"https://t.me/{update_channel}")]
+
+              ])
+
+            )
+
+            return
+
+        else:
+          await bot.delete_messages(
             chat_id=update.chat.id,
             message_ids=update.message_id,
             revoke=True
